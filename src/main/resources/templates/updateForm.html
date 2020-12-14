@@ -6,7 +6,7 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
 </head>
 <body>
-<h1>Create a character:</h1>
+<h1>Update a character:</h1>
 
 <!--
    In Thymeleaf the equivalent of
@@ -14,8 +14,8 @@
    would be @{/edit.html}
    -->
 
-<form th:action="@{/addPerson}"
-      th:object="${characterForm}" method="POST">
+<form th:action="|/update/${character.id}|"
+      th:object="${character}" method="POST">
 
     Name:
     <input type="text" th:field="*{name}" />
@@ -28,7 +28,7 @@
     </select>
     <br/>
 
-    <input type="submit" value="Create" />
+    <input type="submit" value="Update" />
 </form>
 
 <br/>

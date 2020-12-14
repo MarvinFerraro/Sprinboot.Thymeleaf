@@ -1,16 +1,16 @@
 package com.example.SpringBoot.model;
 
-public class Person {
+public class Character {
 
     private int id;
     private String name;
     private String type;
 
-    public Person() {
+    public Character() {
 
     }
 
-    public Person(int id, String name, String type) {
+    public Character(int id, String name, String type) {
         this.id = id;
         this.name = name;
         this.type = type;

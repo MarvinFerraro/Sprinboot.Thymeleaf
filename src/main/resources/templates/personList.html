@@ -15,9 +15,18 @@
             <th>Name</th>
             <th>Type of Character</th>
         </tr>
-        <tr th:each ="person : ${persons}">
-            <td th:utext="${person.name}">...</td>
-            <td th:utext="${person.type}">...</td>
+        <tr th:each ="character : ${characters}">
+            <td th:utext="${character.name}">...</td>
+            <td th:utext="${character.type}">...</td>
+            <td>
+                <a th:href="|/updateForm/${character.id}|">Update</a>
+            </td>
+            <td>
+                <form th:action="|/delete/${character.id}|" th:method="post">
+                    <input type="hidden" name="_method" value="post">
+                    <input type="submit" value="Delete" />
+                </form>
+            </td>
         </tr>
     </table>
 </div>

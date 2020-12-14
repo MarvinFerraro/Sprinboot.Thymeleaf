@@ -1,6 +1,6 @@
 package com.example.SpringBoot.form;
 
-public class PersonForm {
+public class CharacterForm {
 
     private int id;
     private String name;
