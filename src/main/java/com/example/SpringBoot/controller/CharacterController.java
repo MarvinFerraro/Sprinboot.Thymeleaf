@@ -20,7 +20,7 @@ public class CharacterController {
 
     private Character[] characters;
 
-    private final String CHAR_URI = "http://localhost:8081/personnages";
+    private final String CHAR_URI = "http://localhost:8081/characters";
 
 
     //Init CharacterList
@@ -56,7 +56,6 @@ public class CharacterController {
         return "personList";
     }
 
-
     @RequestMapping(value = { "/addPerson" }, method = RequestMethod.GET)
     public String showAddPersonPage(Model model) {
 
@@ -74,6 +73,7 @@ public class CharacterController {
 
         if (name != null && name.length() > 0 && type != null && type.length() > 0) {
             InitList();
+            //For on ID, take the bigger ID
             Character newCharacter = new Character(characters.length + 1,name, type);
             ResponseEntity<Character> response = restTemplate.postForEntity(CHAR_URI, newCharacter, Character.class);
 
@@ -95,6 +95,14 @@ public class CharacterController {
         return "updateForm";
     }
 
+    @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
+    public String update(@ModelAttribute("personForm") Character character, @PathVariable int id) {
+
+        restTemplate.put(CHAR_URI + "/" + id, character, Character.class);
+
+        return "redirect:/personList";
+    }
+
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
     public String deleteCharacter(@PathVariable int id) {
 
@@ -107,11 +115,5 @@ public class CharacterController {
         return "redirect:/personList";
     }
 
-    @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
-    public String update(@ModelAttribute("personForm") Character character, @PathVariable int id) {
 
-        restTemplate.put(CHAR_URI + "/" + id, character, Character.class);
-
-        return "redirect:/personList";
-    }
 }
